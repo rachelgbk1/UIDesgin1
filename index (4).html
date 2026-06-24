@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rachel Gladys Bakanaasa | UI Design Programming 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f7f6f3;
+      --fg: #111;
+      --muted: #888;
+      --border: #e0ddd8;
+      --card-bg: #fff;
+
+      --c1: #e8f5e3;  /* mint — clock */
+      --c1t: #2a6b1a;
+      --c2: #fff0db;  /* warm amber — ASCII town */
+      --c2t: #7a4a00;
+      --c3: #ffe8f0;  /* pink — interactive poster */
+      --c3t: #a01040;
+      --c4: #e8eeff;  /* periwinkle — P1 app */
+      --c4t: #1a2e9a;
+      --c5: #f0eeff;  /* lavender — public utility */
+      --c5t: #4a2090;
+      --c6: #e2f6f6;  /* teal — Rachel's Place */
+      --c6t: #0a5a5a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--fg); }
+
+    /* HERO */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 strong {
+      font-weight: 500;
+    }
+
+    .hero-bio {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    /* PROJECTS */
+    .projects {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 2rem;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+    }
+
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border: 1px solid var(--border);
+      background: var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .project-row {
+      background: var(--card-bg);
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      align-items: center;
+      gap: 0;
+      padding: 1.4rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+
+    .project-row:hover {
+      background: #fafaf8;
+    }
+
+    .project-swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .project-info {
+      padding: 0 1rem;
+    }
+
+    .project-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: 3px;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .project-meta {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .project-arrow {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: #ccc;
+      transition: color 0.15s;
+    }
+
+    .project-row:hover .project-arrow {
+      color: var(--fg);
+    }
+
+    .music {
+      border-top: 1px solid var(--border);
+    }
+
+    .music-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    /* ABOUT */
+    .about {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .about h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .about p {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .about p + p { margin-top: 0.75rem; }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-chip {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--border);
+    }
+
+    footer a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer a:hover { color: var(--fg); }
+
+    @media (max-width: 560px) {
+      .about { grid-template-columns: 1fr; gap: 2rem; }
+      nav { padding: 0 1rem; }
+      .hero, .projects, .about { padding-left: 1rem; padding-right: 1rem; }
+      .project-row { grid-template-columns: 44px 1fr; }
+      .project-meta { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-name" href="#">RGB</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#exercises">Exercises</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://github.com/rachelgbk1/UIDesgin1" target="_blank">GitHub ↗</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-eyebrow">UI Design Programming 1 — 2024/25</p>
+    <h1>
+      <strong>Rachel Gladys Bakanaasa</strong><br>
+      Designer & Developer
+    </h1>
+    <p class="hero-bio">
+      From London, studying at the University of Leicester — currently on a year abroad in Seoul. By day I build websites and interactive experiences; by night I DJ. This is the work I built this semester.
+    </p>
+  </section>
+
+  <section class="projects" id="projects">
+    <p class="section-label">Projects — 2025</p>
+
+    <div class="project-list">
+
+      <!-- P1 App -->
+      <a class="project-row" href="https://www.figma.com/design/3FoZduXnIyC1nD4qApXs6F/Untitled?node-id=1-2&t=uqVKuE0XuoX7QOiU-1" target="_blank">
+        <div class="project-swatch" style="background: var(--c4);">📱</div>
+        <div class="project-info">
+          <p class="project-title">App Design — Project 1</p>
+          <p class="project-desc">A designed mobile app concept built in Figma — screens, components, and interaction flows.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-tag" style="background:var(--c4); color:var(--c4t);">Figma</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- Public Utility -->
+      <a class="project-row" href="https://rachelgbk1.github.io/almostwebsite/" target="_blank">
+        <div class="project-swatch" style="background: var(--c5);">⚡</div>
+        <div class="project-info">
+          <p class="project-title">Public Utility</p>
+          <p class="project-desc">A live web tool built for public use — HTML, CSS, and JavaScript brought together as something useful.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-tag" style="background:var(--c5); color:var(--c5t);">HTML / JS</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="projects" id="exercises">
+    <p class="section-label">Exercises — 2025</p>
+
+    <div class="project-list">
+
+      <!-- Flower Clock -->
+      <a class="project-row" href="clock" target="_blank">
+        <div class="project-swatch" style="background: var(--c1);">🌸</div>
+        <div class="project-info">
+          <p class="project-title">Flower Clock — Selenicereus</p>
+          <p class="project-desc">An animated canvas clock that blooms in real time. The flower grows through the day and petals fall at night.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-tag" style="background:var(--c1); color:var(--c1t);">HTML / Canvas</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- ASCII Town -->
+      <a class="project-row" href="Rachel's PLACE" target="_blank">
+        <div class="project-swatch" style="background: var(--c2);">🏙</div>
+        <div class="project-info">
+          <p class="project-title">Rachel's ASCII Town</p>
+          <p class="project-desc">A hand-crafted ASCII scene — buildings, trees, buses, and a cat. Text art as world-building.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-tag" style="background:var(--c2); color:var(--c2t);">ASCII / Text Art</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- Interactive Poster -->
+      <a class="project-row" href="https://www.figma.com/design/R1pfi8t5or8KTglp1Hombm/Bakanaasa-Rachel-Poster?m=auto&t=NxUxILm2I29hLIYF-6" target="_blank">
+        <div class="project-swatch" style="background: var(--c3);">✦</div>
+        <div class="project-info">
+          <p class="project-title">Interactive Poster</p>
+          <p class="project-desc">A Figma interactive poster built for a guest lecture — neon glitch sign design centred on typography and motion.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-tag" style="background:var(--c3); color:var(--c3t);">Figma</span>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="music" id="music">
+    <div class="music-inner">
+      <p class="section-label">Currently playing</p>
+      <iframe
+        src="https://open.spotify.com/embed/playlist/3nrWkPBgwHZAmwgFn51mao?utm_source=generator&theme=0"
+        width="100%"
+        height="352"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        style="border-radius: 12px; display: block;">
+      </iframe>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div>
+      <h2>About</h2>
+      <p>I'm Rachel — a student at the University of Leicester finishing a year abroad in Seoul, South Korea. I study across music, health sciences, and design.</p>
+      <p>I also DJ — music is how I think about energy, timing, and culture, and it tends to show up in the way I approach design too.</p>
+    </div>
+    <div>
+      <h2>Built with</h2>
+      <div class="skills-list">
+        <span class="skill-chip">HTML</span>
+        <span class="skill-chip">CSS</span>
+        <span class="skill-chip">JavaScript</span>
+        <span class="skill-chip">Canvas API</span>
+        <span class="skill-chip">Figma</span>
+        <span class="skill-chip">GitHub Pages</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Rachel Gladys Bakanaasa — 2025</span>
+    <a href="https://github.com/rachelgbk1/UIDesgin1" target="_blank">github ↗</a>
+  </footer>
+
+</body>
+</html>
